@@ -1,0 +1,1251 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Python Basics}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{python-basics-a-review}{%
+\section{Python Basics: A Review}\label{python-basics-a-review}}
+
+This is a basic review of python basics
+
+Part of Datacamp's ``Intro to Python for Data Science''
+
+    \hypertarget{printing-it-has-to-begin-somewhere}{%
+\subsection{Printing (it has to begin
+somewhere)}\label{printing-it-has-to-begin-somewhere}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Some basic printing}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{+}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello World}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Noah}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello there }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{b} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ You}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{re number}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print something multiple times}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hey }\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+7
+12
+Hello World
+Hello there Noah You're number
+Hey Hey 
+
+    \end{Verbatim}
+
+    \hypertarget{basic-math-operators}{%
+\subsection{Basic Math Operators}\label{basic-math-operators}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} The ** is exponentiation}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{18}\PY{o}{\PYZpc{}}\PY{k}{7}) \PYZsh{} The \PYZpc{} is called Modulo and returns remainders
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+16
+4
+
+    \end{Verbatim}
+
+    \hypertarget{variable-types}{%
+\subsection{Variable Types}\label{variable-types}}
+
+    \begin{itemize}
+\item
+  int, or integer: a number without a fractional part. savings, with the
+  value 100, is an example of an integer.
+\item
+  float, or floating point: a number that has both an integer and
+  fractional part, separated by a point. factor, with the value 1.10, is
+  an example of a float.
+\item
+  str, or string: a type to represent text. You can use single or double
+  quotes to build a string.
+\item
+  bool, or boolean: a type to represent logical values. Can only be True
+  or False (the capitalization is important!).
+\end{itemize}
+
+You can easily find out what type of variable you're dealing with using
+the function \texttt{type()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{a} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my first var}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n+nb}{type}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} str
+\end{Verbatim}
+            
+    \hypertarget{changing-variable-types}{%
+\subsubsection{Changing Variable Types}\label{changing-variable-types}}
+
+You can also change what type of value a variable is holding using:
+
+\begin{itemize}
+\item
+  \texttt{str()}
+\item
+  \texttt{int()}
+\item
+  \texttt{bool()}
+\item
+  \texttt{float()}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Make floats into strings}
+        \PY{n}{savings} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{result} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{*} \PY{l+m+mf}{1.10} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{7}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I started with \PYZdl{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{savings}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ and now have \PYZdl{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{result}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{. Awesome!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Convert pi\PYZus{}string into float: pi\PYZus{}float}
+        \PY{n}{pi\PYZus{}string} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3.1415926}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{pi\PYZus{}float} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{pi\PYZus{}string}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+I started with \$100 and now have \$194.87171000000012. Awesome!
+
+    \end{Verbatim}
+
+    \hypertarget{lists-the-super-variable}{%
+\subsection{Lists: The super variable}\label{lists-the-super-variable}}
+
+Lists can hold any kind of information, even those of different types
+
+To create a list, surround information with brackets ``{[} {]}''
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} area variables (in square meters)}
+        \PY{n}{hall} \PY{o}{=} \PY{l+m+mf}{11.25}
+        \PY{n}{kit} \PY{o}{=} \PY{l+m+mf}{18.0}
+        \PY{n}{liv} \PY{o}{=} \PY{l+m+mf}{20.0}
+        \PY{n}{bed} \PY{o}{=} \PY{l+m+mf}{10.75}
+        \PY{n}{bath} \PY{o}{=} \PY{l+m+mf}{9.50}
+        
+        \PY{c+c1}{\PYZsh{} Create list areas}
+        \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{n}{hall}\PY{p}{,}\PY{n}{kit}\PY{p}{,}\PY{n}{liv}\PY{p}{,}\PY{n}{bed}\PY{p}{,}\PY{n}{bath}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Print areas}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[11.25, 18.0, 20.0, 10.75, 9.5]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Lists can also contain lists}
+        \PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]} 
+        \PY{n}{B} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{]}
+        \PY{n}{C} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 3, 4, 2]
+[[1, 2, 3], [4, 5, 7]]
+[3, 'aaaaa', 3]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Nicely organize data}
+        \PY{n}{house} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hallway}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hall}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kitchen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{kit}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{living room}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{liv}\PY{p}{]}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{house}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[['hallway', 11.25], ['kitchen', 18.0], ['living room', 20.0]]
+
+    \end{Verbatim}
+
+    \hypertarget{subsetting-lists}{%
+\subsubsection{Subsetting Lists}\label{subsetting-lists}}
+
+Python uses 0-based indexing, so the first element is called the zeroth
+element. Index lists with brackets ``{[} {]}''
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Create the areas list}
+        \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hallway}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kitchen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{living room}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedroom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathroom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Print out second element from areas}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print out last element from areas}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print out the area of the living room}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+11.25
+9.5
+20.0
+
+    \end{Verbatim}
+
+    ``Slicing'' is a indexing an array of elements. It's as so:
+\texttt{my\_list{[}start:end{]}} All elements from start until BUT NOT
+INCLUDING end will be included in the subset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ['b', 'c']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Create the areas list}
+         \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hallway}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kitchen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{living room}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedroom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathroom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Use slicing to create downstairs}
+         \PY{n}{downstairs} \PY{o}{=} \PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Use slicing to create upstairs}
+         \PY{n}{upstairs} \PY{o}{=} \PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Print out downstairs and upstairs}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{downstairs}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{upstairs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['hallway', 11.25, 'kitchen', 18.0, 'living room', 20.0]
+['bedroom', 10.75, 'bathroom', 9.5]
+
+    \end{Verbatim}
+
+    Without spcifying either start or end while slicing, python will include
+the rest of the elements
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['a', 'b']
+['c', 'd']
+['a', 'b', 'c', 'd']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Alternative slicing to create downstairs}
+         \PY{n}{downstairs} \PY{o}{=} \PY{n}{areas}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Alternative slicing to create upstairs}
+         \PY{n}{upstairs} \PY{o}{=} \PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    We also have to know how to subset lists within lists
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+              \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+g
+['g', 'h']
+
+    \end{Verbatim}
+
+    Gotta also know how to assign new values and add on to the list!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Correct the bathroom area}
+         \PY{n}{areas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{10.50}
+         
+         \PY{c+c1}{\PYZsh{} Change \PYZdq{}living room\PYZdq{} to \PYZdq{}chill zone\PYZdq{}}
+         \PY{n}{areas}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chill zone}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Add poolhouse data to areas, new list is areas\PYZus{}1}
+         \PY{n}{areas\PYZus{}1} \PY{o}{=} \PY{n}{areas} \PY{o}{+} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poolhouse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{24.5}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas\PYZus{}1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add garage data to areas\PYZus{}1, new list is areas\PYZus{}2}
+         \PY{n}{areas\PYZus{}2} \PY{o}{=} \PY{n}{areas\PYZus{}1} \PY{o}{+} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{garage}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mf}{15.45}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['hallway', 11.25, 'kitchen', 18.0, 'chill zone', 20.0, 'bedroom', 10.75, 'bathroom', 10.5, 'poolhouse', 24.5]
+['hallway', 11.25, 'kitchen', 18.0, 'chill zone', 20.0, 'bedroom', 10.75, 'bathroom', 10.5, 'poolhouse', 24.5, 'garage', 15.45]
+
+    \end{Verbatim}
+
+    \hypertarget{deleting-list-elements}{%
+\subsubsection{Deleting List Elements}\label{deleting-list-elements}}
+
+The function \texttt{del()} allows you to delete elements within a list
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{del}\PY{p}{(}\PY{n}{areas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['hallway', 11.25, 'kitchen', 18.0, 'chill zone', 20.0, 'bathroom', 10.5]
+
+    \end{Verbatim}
+
+    \hypertarget{copying-lists}{%
+\subsubsection{Copying Lists}\label{copying-lists}}
+
+When you make a copy of a list like so:
+\texttt{list\_copy\ =\ list\_orig}, any change that happens to
+\texttt{list\_copy} will happen to \texttt{list\_orig} as well
+
+You can avoid this by using \texttt{{[}:{]}} or the \texttt{list()}
+function
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Create list areas}
+         \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Create areas\PYZus{}copy}
+         \PY{n}{areas\PYZus{}copy} \PY{o}{=} \PY{n}{areas}
+         \PY{c+c1}{\PYZsh{} Change areas\PYZus{}copy}
+         \PY{n}{areas\PYZus{}copy}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{5.0}
+         \PY{c+c1}{\PYZsh{} Print areas}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[5.0, 18.0, 20.0, 10.75, 9.5]
+
+    \end{Verbatim}
+
+    Now using \texttt{list()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Create list areas}
+         \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Create areas\PYZus{}copy}
+         \PY{n}{areas\PYZus{}copy} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Change areas\PYZus{}copy}
+         \PY{n}{areas\PYZus{}copy}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{5.0}
+         
+         \PY{c+c1}{\PYZsh{} Print areas}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[11.25, 18.0, 20.0, 10.75, 9.5]
+
+    \end{Verbatim}
+
+    \hypertarget{functions}{%
+\section{Functions}\label{functions}}
+
+A function is a piece of reusable code aimed at solving a particular
+task. One of the most important functions is \texttt{help()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{help}\PY{p}{(}\PY{n+nb}{round}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} can also execute using \PYZdq{}?round\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Help on built-in function round in module builtins:
+
+round({\ldots})
+    round(number[, ndigits]) -> number
+    
+    Round a number to a given precision in decimal digits (default 0 digits).
+    This returns an int when called with one argument, otherwise the
+    same type as the number. ndigits may be negative.
+
+
+    \end{Verbatim}
+
+    For the \texttt{round()} function, there are two inputs:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{number}
+\item
+  \texttt{ndigits}
+\end{enumerate}
+
+When you see brackets ``{[} {]}'' around one of the arguments, it means
+it's optional.
+
+Here are some examples below
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Create variables var1 and var2}
+         \PY{n}{var1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}
+         \PY{n}{var2} \PY{o}{=} \PY{k+kc}{True}
+         
+         \PY{c+c1}{\PYZsh{} Print out type of var1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{var1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out length of var1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{var1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Convert var2 to an integer: out2}
+         \PY{n}{out2} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{var2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{out2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'list'>
+4
+1
+
+    \end{Verbatim}
+
+    You can also tell optional arguments if you see they have default
+values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{help}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Help on built-in function sorted in module builtins:
+
+sorted(iterable, /, *, key=None, reverse=False)
+    Return a new list containing all items from the iterable in ascending order.
+    
+    A custom key function can be supplied to customize the sort order, and the
+    reverse flag can be set to request the result in descending order.
+
+
+    \end{Verbatim}
+
+    Function \texttt{sorted()} takes three arguments: iterable, key, sorted
+
+If you don't specify a value for \texttt{key}, it will assume a default
+value of \texttt{None}. Same thing for \texttt{reverse} but it will
+assume default value of \texttt{False}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Create lists first and second}
+         \PY{n}{first} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{]}
+         \PY{n}{second} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Paste together first and second: full}
+         \PY{n}{full} \PY{o}{=} \PY{n}{first} \PY{o}{+} \PY{n}{second}
+         
+         \PY{c+c1}{\PYZsh{} Sort full in descending order: full\PYZus{}sorted}
+         \PY{n}{full\PYZus{}sorted} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{full}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out full\PYZus{}sorted}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{full\PYZus{}sorted}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[20.0, 18.0, 11.25, 10.75, 9.5]
+
+    \end{Verbatim}
+
+    \hypertarget{methods}{%
+\subsection{Methods}\label{methods}}
+
+Functions that belong to Python objects (such as strings, floats, lists
+etc.)
+
+Strings objects have methods such as \texttt{capitalize()} and
+\texttt{replace()}
+
+To use Methods, use dot notation such as
+\texttt{my\_string.capitalize()}
+
+Methods can also change the object they're called on
+
+You can discover more methods by calling help on an object such as
+\texttt{help(str)}
+
+Some string methods include:
+
+\begin{itemize}
+\item
+  \texttt{upper()}: Make all characters upper case
+\item
+  \texttt{count()}: Count the amount of times a character appears in a
+  string
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} STRING METHODS}
+         \PY{c+c1}{\PYZsh{} string to experiment with: place}
+         \PY{n}{place} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poolhouse}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Use upper() on place: place\PYZus{}up}
+         \PY{n}{place\PYZus{}up} \PY{o}{=} \PY{n}{place}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out place and place\PYZus{}up}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{place} \PY{o}{+} \PY{n}{place\PYZus{}up}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out the number of o\PYZsq{}s in place}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{place}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+poolhousePOOLHOUSE
+3
+
+    \end{Verbatim}
+
+    Some List methods include:
+
+\begin{itemize}
+\item
+  \texttt{index()} - Location of an element in a list
+\item
+  \texttt{count()} - Amount of times a character appears in a list
+\item
+  \texttt{append()} - Append input to the end of a list
+\item
+  \texttt{reverse()} - Reverse order of a list
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} LIST METHODS}
+         \PY{c+c1}{\PYZsh{} Create list areas}
+         \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Print out the index of the element 20.0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out how often 9.50 appears in areas}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+m+mf}{9.50}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Create list areas}
+         \PY{n}{areas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{11.25}\PY{p}{,} \PY{l+m+mf}{18.0}\PY{p}{,} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{l+m+mf}{10.75}\PY{p}{,} \PY{l+m+mf}{9.50}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Use append twice to add poolhouse and garage size}
+         \PY{n}{areas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{24.5}\PY{p}{)}
+         \PY{n}{areas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{15.45}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out areas}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Reverse the orders of the elements in areas}
+         \PY{n}{areas}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out areas}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{areas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[11.25, 18.0, 20.0, 10.75, 9.5, 24.5, 15.45]
+[15.45, 24.5, 9.5, 10.75, 20.0, 18.0, 11.25]
+
+    \end{Verbatim}
+
+    \hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+Like a directory of Python scripts
+
+Each Script is called a ``Module''. Each Module includes Methods,
+Functions and Object Types
+
+One of the most popular packages is numpy. It can be imported with the
+following code:
+
+\texttt{import\ numpy} Now you can use its' function \texttt{array()} as
+so: \texttt{numpy.array({[}1,2,3{]})}
+
+\texttt{import\ numpy\ as\ np} You can shorten how much you need to type
+by importing numpy with the above code so now the function can be called
+as \texttt{np.array({[}1,2,3{]})}
+
+\texttt{from\ numpy\ import\ array} You can also import specific
+functions from a package with the above so now the \texttt{array()}
+function can be used like this: \texttt{array({[}1,2,3{]})}. The
+downside to this approach is that others may not know you called this
+specific function from the numpy package
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Now here\PYZsq{}s the Math package}
+         
+         \PY{c+c1}{\PYZsh{} Definition of radius}
+         \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.43}
+         
+         \PY{c+c1}{\PYZsh{} Import the math package}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         \PY{c+c1}{\PYZsh{} Calculate C}
+         \PY{n}{C} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{r}
+         
+         \PY{c+c1}{\PYZsh{} Calculate A}
+         \PY{n}{A} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         
+         \PY{c+c1}{\PYZsh{} Build printout}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Circumference: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Circumference: 2.701769682087222
+Area: 0.5808804816487527
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Definition of radius}
+         \PY{n}{r} \PY{o}{=} \PY{l+m+mi}{192500}
+         
+         \PY{c+c1}{\PYZsh{} Import radians function of math package}
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{radians}
+         
+         \PY{c+c1}{\PYZsh{} Travel distance of Moon over 12 degrees. Store in dist.}
+         \PY{n}{dist} \PY{o}{=} \PY{n}{radians}\PY{p}{(}\PY{n}{r}\PY{o}{*}\PY{l+m+mi}{12}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out dist}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{dist}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+40317.10572106901
+
+    \end{Verbatim}
+
+    There are a few different ways to import functions and packages. The
+scipy subpackage called linalg has a function called \texttt{inv()} and
+you have the capability to call it as:
+
+\texttt{my\_inv({[}{[}1,2{]},\ {[}3,4{]}{]})} by entering
+
+\texttt{from\ scipy.linalg\ import\ inv\ as\ my\_inv}
+
+    \hypertarget{numpy}{%
+\section{Numpy}\label{numpy}}
+
+Lists store values but are not efficient for doing calculations on
+arrays of numbers. Numpy arrays are powerful because they don't have
+this issue
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Create list baseball}
+         \PY{n}{baseball} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{215}\PY{p}{,} \PY{l+m+mi}{210}\PY{p}{,} \PY{l+m+mi}{210}\PY{p}{,} \PY{l+m+mi}{188}\PY{p}{,} \PY{l+m+mi}{176}\PY{p}{,} \PY{l+m+mi}{209}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Import the numpy package as np}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{c+c1}{\PYZsh{} Create a numpy array from baseball: np\PYZus{}baseball}
+         \PY{n}{np\PYZus{}baseball} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{baseball}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out type of np\PYZus{}baseball}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'numpy.ndarray'>
+[ 90.  107.5 105.  105.   94.   88.  104.5 100. ]
+
+    \end{Verbatim}
+
+    You can also filter out arrays using boolean values/arrays. First you
+must have a conditional statement
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Create the light array}
+         \PY{n}{light} \PY{o}{=} \PY{n}{np\PYZus{}baseball} \PY{o}{\PYZlt{}} \PY{l+m+mi}{200}
+         
+         \PY{c+c1}{\PYZsh{} Print out light}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{light}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out BMIs of all baseball players whose BMI is below 21}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{n}{light}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ True False False False  True  True False False]
+[180 188 176]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} These two lines of code produce the same results}
+         \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{k+kc}{True}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{k+kc}{False}\PY{p}{]}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} array([4, 5, 2])
+\end{Verbatim}
+            
+    Indexing numpy arrays work similarly to indexing lists
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+210
+[210 210 188]
+
+    \end{Verbatim}
+
+    \hypertarget{d-numpy-arrays}{%
+\subsection{2D Numpy Arrays}\label{d-numpy-arrays}}
+
+If you enter \texttt{type(np\_baseball)} you'll get:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} numpy.ndarray
+\end{Verbatim}
+            
+    ndarray = N-Dimensional array. Thus far we've create 1D numpy arrays
+
+Can create 2D Numpy array. You can easily think of a 2D array as a list
+containing multiple lists. Below is an example
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} Create baseball, a list of lists}
+         \PY{n}{baseball} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mf}{78.4}\PY{p}{]}\PY{p}{,}
+                     \PY{p}{[}\PY{l+m+mi}{215}\PY{p}{,} \PY{l+m+mf}{102.7}\PY{p}{]}\PY{p}{,}
+                     \PY{p}{[}\PY{l+m+mi}{210}\PY{p}{,} \PY{l+m+mf}{98.5}\PY{p}{]}\PY{p}{,}
+                     \PY{p}{[}\PY{l+m+mi}{188}\PY{p}{,} \PY{l+m+mf}{75.2}\PY{p}{]}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Create a 2D numpy array from baseball: np\PYZus{}baseball}
+         \PY{n}{np\PYZus{}baseball} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{baseball}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[180.   78.4]
+ [215.  102.7]
+ [210.   98.5]
+ [188.   75.2]]
+
+    \end{Verbatim}
+
+    If we print \texttt{type()} of this array, it will still be a numpy
+array
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Print out the type of np\PYZus{}baseball}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'numpy.ndarray'>
+
+    \end{Verbatim}
+
+    There's a special method for numpy arrays called \texttt{.shape} that
+displays the dimensions of the numpy array
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} Print out the shape of np\PYZus{}baseball}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(4, 2)
+
+    \end{Verbatim}
+
+    \hypertarget{subsetting-2d-numpy-arrays}{%
+\subsubsection{Subsetting 2D Numpy
+Arrays}\label{subsetting-2d-numpy-arrays}}
+
+If your 2D numpy array has a regular structure, i.e.~each row and column
+has a fixed number of values, complicated ways of subsetting become very
+easy. Supply 2 inputs for subsetting, \texttt{{[}rows,columns{]}}
+
+Entering \texttt{Variable{[}:,0{]}} will select all rows and the first
+column
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Print out the 2nd row of np\PYZus{}baseball}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Select the entire second column of np\PYZus{}baseball: np\PYZus{}weight}
+         \PY{n}{np\PYZus{}weight} \PY{o}{=} \PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Print out height of 4th player}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[215.  102.7]
+188.0
+
+    \end{Verbatim}
+
+    \hypertarget{basic-2d-arithmetic}{%
+\subsubsection{Basic 2D Arithmetic}\label{basic-2d-arithmetic}}
+
+For numpy arrays, it's very easy to perform matrix wise or element-wise
+operations
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{np\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                            \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                            \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}mat} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}mat} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np\PYZus{}mat} \PY{o}{+} \PY{n}{np\PYZus{}mat}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 2  4]
+ [ 6  8]
+ [10 12]]
+[[11 12]
+ [13 14]
+ [15 16]]
+[[ 2  4]
+ [ 6  8]
+ [10 12]]
+
+    \end{Verbatim}
+
+    \hypertarget{numpy-basic-statistics}{%
+\subsection{Numpy Basic Statistics}\label{numpy-basic-statistics}}
+
+For large data, generating summarizations is necessary
+
+There's a mean function: \texttt{np.mean()}
+
+There's a median function: \texttt{np.median()}
+
+Standard Deviation: \texttt{np.std()}
+
+Correlated Coefficients: \texttt{np.corrcoef(x,y)}
+
+There is also a numpy \texttt{sort()} and \texttt{sum()} functions that
+run faster because they're operating on a single data type!
+
+For easy data simulations, you can generate pseudo-random numbers
+
+Ex: \textgreater{}Create 5000 data points from a normal distribution
+with mean 1.75 and SD 0.20. Round all values to 2 decimal places:
+
+\begin{quote}
+\texttt{height\ =\ np.round(np.random.normal(1.75,0.20,5000),2)}
+\end{quote}
+
+\begin{quote}
+\texttt{weight\ =\ np.round(np.random.normal(60,0.20,5000),2)}
+\end{quote}
+
+\begin{quote}
+Then I can stack the columns into a single Numpy Array
+\end{quote}
+
+\begin{quote}
+\texttt{np\_dataset\ =\ np.column\_stack((height,weight))}
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} array([ 9.12651334,  9.84474543, 10.25689553, 11.20858775,  9.1085513 ])
+\end{Verbatim}
+            
+    Now here's an example of summarizing data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Create the dataset}
+         \PY{n}{h} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mf}{1.75}\PY{p}{,}\PY{l+m+mf}{0.20}\PY{p}{,}\PY{l+m+mi}{1015}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mf}{0.20}\PY{p}{,}\PY{l+m+mi}{1015}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1015}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{np\PYZus{}baseball} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{h}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now for some basic summarizations}
+         \PY{c+c1}{\PYZsh{} Create np\PYZus{}height from np\PYZus{}baseball}
+         \PY{n}{np\PYZus{}height} \PY{o}{=} \PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Print out the mean of np\PYZus{}height}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean is: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np\PYZus{}height}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out the median of np\PYZus{}height}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Median is: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{n}{np\PYZus{}height}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean is:  1.7381182266009854
+Median is:  1.73
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Now a little fancier}
+         \PY{c+c1}{\PYZsh{} Print out the standard deviation on height. Replace \PYZsq{}None\PYZsq{}}
+         \PY{n}{stddev} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Standard Deviation: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{stddev}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print out correlation between first and second column. Replace \PYZsq{}None\PYZsq{}}
+         \PY{n}{corr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{np\PYZus{}baseball}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{corr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Standard Deviation: 0.19608610206102214
+Correlation: [[1.         0.01653367]
+ [0.01653367 1.        ]]
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
